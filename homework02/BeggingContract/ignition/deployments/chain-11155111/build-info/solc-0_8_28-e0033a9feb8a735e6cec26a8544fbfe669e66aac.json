@@ -1,0 +1,39 @@
+{
+  "_format": "hh3-sol-build-info-1",
+  "id": "solc-0_8_28-e0033a9feb8a735e6cec26a8544fbfe669e66aac",
+  "solcVersion": "0.8.28",
+  "solcLongVersion": "0.8.28+commit.7893614a",
+  "userSourceNameMap": {
+    "contracts/BeggingContract.sol": "project/contracts/BeggingContract.sol"
+  },
+  "input": {
+    "language": "Solidity",
+    "settings": {
+      "evmVersion": "cancun",
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "outputSelection": {
+        "*": {
+          "": [
+            "ast"
+          ],
+          "*": [
+            "abi",
+            "evm.bytecode",
+            "evm.deployedBytecode",
+            "evm.methodIdentifiers",
+            "metadata"
+          ]
+        }
+      },
+      "remappings": []
+    },
+    "sources": {
+      "project/contracts/BeggingContract.sol": {
+        "content": "// SPDX-License-Identifier: UNLICENSED\r\npragma solidity ^0.8.28;\r\n\r\ncontract BeggingContract {\r\n    address public owner;\r\n    mapping(address => uint256) public donations;\r\n    uint256 public totalDonations;\r\n    address[] private donors;\r\n    \r\n    event DonationReceived(address indexed donor, uint256 amount);\r\n    event Withdrawal(address indexed owner, uint256 amount);\r\n    \r\n    modifier onlyOwner() {\r\n        require(msg.sender == owner, \"Only owner can call this function\");\r\n        _;\r\n    }\r\n    \r\n    constructor() {\r\n        owner = msg.sender;\r\n    }\r\n    \r\n    function donate() external payable {\r\n        require(msg.value > 0, \"Donation amount must be greater than 0\");\r\n        \r\n        // 如果是新捐赠者，添加到捐赠者列表\r\n        if (donations[msg.sender] == 0) {\r\n            donors.push(msg.sender);\r\n        }\r\n        \r\n        donations[msg.sender] += msg.value;\r\n        totalDonations += msg.value;\r\n        \r\n        emit DonationReceived(msg.sender, msg.value);\r\n    }\r\n    \r\n    function withdraw() external onlyOwner {\r\n        uint256 balance = address(this).balance;\r\n        require(balance > 0, \"No funds to withdraw\");\r\n        \r\n        payable(owner).transfer(balance);\r\n        \r\n        emit Withdrawal(owner, balance);\r\n    }\r\n    \r\n    function getDonation(address donor) external view returns (uint256) {\r\n        return donations[donor];\r\n    }\r\n    \r\n    function getContractBalance() external view returns (uint256) {\r\n        return address(this).balance;\r\n    }\r\n    \r\n    // 获取捐赠者总数\r\n    function getDonorCount() external view returns (uint256) {\r\n        return donors.length;\r\n    }\r\n}"
+      }
+    }
+  }
+}

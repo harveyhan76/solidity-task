@@ -1,0 +1,32 @@
+{
+  "name": "我的数字艺术 #1",
+  "description": "这是一幅独特的数字艺术作品，融合了现代科技与艺术创作。作品展现了区块链技术的无限可能性，每一件都是独一无二的数字资产。",
+  "image": "ipfs://bafybeihqkpdg7fj73qv2roatt3gqdgpkfyibq6hqqf2g4fj6vjxtk7dhhi",
+  "external_url": "https://mynft.com/token/1",
+  "attributes": [
+    {
+      "trait_type": "艺术家",
+      "value": "数字创作者"
+    },
+    {
+      "trait_type": "创作年份",
+      "value": "2024"
+    },
+    {
+      "trait_type": "稀有度",
+      "value": "稀有"
+    },
+    {
+      "trait_type": "艺术风格",
+      "value": "数字抽象"
+    },
+    {
+      "trait_type": "背景颜色",
+      "value": "渐变蓝"
+    },
+    {
+      "trait_type": "元素数量",
+      "value": 5
+    }
+  ]
+}
